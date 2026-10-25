@@ -1,0 +1,38 @@
+name: Build and share artifact
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out repository
+        uses: self:actions/checkout@v7
+
+      - name: Build
+        run: |
+          mkdir -p dist
+          echo "Build output" > dist/output.txt
+
+      - name: Upload artifact
+        uses: self:actions/upload-artifact@v5
+        with:
+          name: build-output
+          path: dist/
+
+  use-artifact:
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Download artifact
+        uses: self:actions/download-artifact@v8
+        with:
+          name: build-output
+          path: downloaded/
+
+      - name: Show downloaded files
+        run: ls -R downloaded/
