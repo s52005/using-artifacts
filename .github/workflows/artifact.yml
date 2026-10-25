@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: self:actions/checkout@v7
@@ -25,7 +25,7 @@ jobs:
 
   use-artifact:
     needs: build
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       - name: Download artifact
         uses: self:actions/download-artifact@v8
