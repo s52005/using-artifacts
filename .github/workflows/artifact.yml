@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: self:actions/checkout@v7
+        uses: actions/checkout@v7
 
       - name: Build
         run: |
@@ -18,7 +18,7 @@ jobs:
           echo "Build output" > dist/output.txt
 
       - name: Upload artifact
-        uses: self:actions/upload-artifact@v5
+        uses: actions/upload-artifact@v5
         with:
           name: build-output
           path: dist/
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download artifact
-        uses: self:actions/download-artifact@v8
+        uses: actions/download-artifact@v8
         with:
           name: build-output
           path: downloaded/
